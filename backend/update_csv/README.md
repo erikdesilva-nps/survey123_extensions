@@ -11,4 +11,6 @@ This script is used to update hosted comma separated value files (.csv) on ArcGI
 <pre><code>from update_survey_lcontent import update_picklists
 update_picklists(item_id='65a3fed8a716456cbb066a972ce9e075',
                  sql_schema='example_schema',
-                 table_name='example_table')</code></pre>
+                 table_name='example_table',
+                 field_map={'example_name': 'name',
+                            'example_label': 'label'})</code></pre>
