@@ -6,7 +6,7 @@ from pandas import read_sql_query
 from arcgis.gis import GIS, Item
 
 
-def update_picklists(item_id, sql_schema, table_name):
+def update_picklists(item_id, sql_schema, table_name, field_map):
     """Updates hosted csv file which is used by Survey123 in select_from_file
     questions. Updates the csv file hosted in ArcGIS Online / Portal. CSV
     linking must be used for 'select_x_from_file' question types in the form,
@@ -26,6 +26,8 @@ def update_picklists(item_id, sql_schema, table_name):
     :type table_name: str
     :param sql_schema: SQL schema which contains the target tables
     :type sql_schema: str
+    :param field_map: Dictionary of output field names and their corresponding SQL table names
+    :type label_field: dict
     """
 
     portal_url = r'https://nps.maps.arcgis.com'  # Change to portal URL once migrated
@@ -50,9 +52,15 @@ def update_picklists(item_id, sql_schema, table_name):
               username=agol_credentials.username,
               password=agol_credentials.password)
     item = Item(gis, item_id)
-
+    
+    # Construct query string
+    field_qry_list = []
+    for key, value in field_map.items():
+        field_qry_list.append(f'{value} AS {key}')
+    field_string = ', '.join(field_qry_list)
+    
     # Query SQL table
-    sql_query = f'SELECT * FROM {sql_schema}.{table_name};'
+    sql_query = f'''SELECT {field_string} FROM {sql_schema}.{table_name};'''
     updated_table = read_sql_query(sql_query, engine)
     # Save to disk. Potential optimization is to use in-memory csv serialization, but I can't get it to work
     output = 'temp_csv.csv'
