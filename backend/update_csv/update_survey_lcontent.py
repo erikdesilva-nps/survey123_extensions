@@ -20,7 +20,7 @@ def update_picklists(item_id, sql_schema, table_name):
     Any changes made to picklists contained in linked content csv files will not
     be reflected in a Survey123 web form.
 
-    :param item_id: The item id of the target form
+    :param item_id: The item id of the target hosted .csv
     :type item_id: str
     :param table_name: String which represent the name of the SQL table
     :type table_name: str
