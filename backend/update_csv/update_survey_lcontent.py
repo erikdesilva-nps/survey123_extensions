@@ -26,7 +26,7 @@ def update_picklists(item_id, sql_schema, table_name, field_map):
     :type table_name: str
     :param sql_schema: SQL schema which contains the target tables
     :type sql_schema: str
-    :param field_map: Dictionary of output field names and their corresponding SQL table names
+    :param field_map: Dictionary of input SQL field names and their corresponding output csv field names
     :type label_field: dict
     """
 
@@ -52,11 +52,11 @@ def update_picklists(item_id, sql_schema, table_name, field_map):
               username=agol_credentials.username,
               password=agol_credentials.password)
     item = Item(gis, item_id)
-    
+
     # Construct query string
     field_qry_list = []
     for key, value in field_map.items():
-        field_qry_list.append(f'{value} AS {key}')
+        field_qry_list.append(f'{key} AS {value}')
     field_string = ', '.join(field_qry_list)
     
     # Query SQL table
