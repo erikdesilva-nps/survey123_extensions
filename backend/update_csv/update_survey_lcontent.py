@@ -27,7 +27,7 @@ def update_picklists(item_id, sql_schema, table_name, field_map):
     :param sql_schema: SQL schema which contains the target tables
     :type sql_schema: str
     :param field_map: Dictionary of input SQL field names and their corresponding output csv field names
-    :type label_field: dict
+    :type field_map: dict
     """
 
     portal_url = r'https://nps.maps.arcgis.com'  # Change to portal URL once migrated
