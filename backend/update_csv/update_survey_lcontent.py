@@ -59,7 +59,7 @@ def update_picklists(item_id, sql_schema, table_name, field_map):
     for key, value in field_map.items():
         field_qry_list.append(f'{key} AS {value}')
     field_string = ', '.join(field_qry_list)
-   
+
     # Query SQL table
     sql_query = f'''SELECT {field_string} FROM {sql_schema}.{table_name};'''
     updated_table = read_sql_query(sql_query, engine)
@@ -70,5 +70,3 @@ def update_picklists(item_id, sql_schema, table_name, field_map):
     item.update(data=output)
     # Delete temporary csv file
     remove(output)
-
-    update_picklists()
