@@ -11,9 +11,9 @@ def update_picklists(item_id, sql_schema, table_name, field_map):
 
     Updates the csv file hosted in ArcGIS Online / Portal. CSV linking must be used for
     'select_x_from_file' question types in the form, and content linking must be enabled on these
-    forms. SQL tables must contain 'name' and 'label' fields at a minimum. Additional optional
-    fields may be included to drive cascading select type questions. Database views should be used
-    to reshape existing picklist tables and rename columns as appropriate. ArGIS Online or Portal
+    forms. The field map dictionary shoould be constructed using the format {input_field: output_field}.
+    Output tables must contain 'name' and 'label' fields at a minimum. Additional optional
+    fields may be included to drive cascading select type questions. ArGIS Online or Portal
     login credentials must be saved in the Window Credential Manager as 'Generic Credentials'.
     Note: linked content csvs are currently only supported by the field application. Any changes
     made to picklists contained in linked content csv files will not be reflected in a Survey123 web
